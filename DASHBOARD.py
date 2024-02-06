@@ -3067,7 +3067,7 @@ def Waitlist_add_population(df_long, population):
         df_long['Difference - prior year per 10 000'] = df_long.apply(lambda row: row['Difference - prior year'] / row['POPULATION'] * 10000 if row['Category'] in ['Total individuals', 'Priority individuals', 'nonPriority individuals'] else float('nan'), axis=1)
     if '12 month rolling average' in df_long.columns:
         df_long['12 month rolling average per 10 000'] = df_long.apply(lambda row: row['12 month rolling average'] / row['POPULATION'] * 10000 if row['Category'] in ['Total individuals', 'Priority individuals', 'nonPriority individuals'] else float('nan'), axis=1)
-    df_long = df_long.drop(['DATE'], axis=1)
+    df_long = df_long.drop(['Date'], axis=1)
     return df_long
 
 def Waitlist_final_long(df_long, Waitlist_trend_longdf, Waitlist_latestdf):
