@@ -2138,6 +2138,7 @@ def upload_data():
                 file = st.file_uploader("Upload completed template")
             with col2:
                 date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
+                date_data = date_data.pd.to_datetime(date_data, format='%d/%m/%Y', dayfirst=True)
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
