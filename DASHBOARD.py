@@ -2832,10 +2832,13 @@ def Waitlist_load_data(newWaitlistData):
     return df
 
 def Waitlist_clear_new_data(newWaitlistData):
-    wb = openpyxl.load_workbook(newWaitlistData)
-    ws = wb.active
-    ws.delete_rows(2, ws.max_row)
-    wb.save(SimpleWaitlistData)
+    try:
+        wb = openpyxl.load_workbook(newWaitlistData)
+        ws = wb.active
+        ws.delete_rows(2, ws.max_row)
+        wb.save(SimpleWaitlistData)
+    except:
+        pass
     return
 
 def Waitlist_convert_to_long_form(df):
