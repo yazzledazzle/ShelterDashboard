@@ -3054,6 +3054,7 @@ def Waitlist_nonpriority(df_long):
          
 def Waitlist_add_population(df_long, population):
     population = population[['Date', 'WA_Population']]
+    population = population.rename(columns={'WA_Population': 'POPULATION'})
     population['Date'] = pd.to_datetime(population['Date'], format='%d/%m/%Y', dayfirst=True)
     df_long['Date'] = pd.to_datetime(df_long['Date'], format='%d/%m/%Y', dayfirst=True)
 
