@@ -3054,6 +3054,9 @@ def Waitlist_nonpriority(df_long):
          
 def Waitlist_add_population(df_long, population):
     population = population[['Date', 'WA_Population']]
+    population['Date'] = pd.to_datetime(population['Date'], format='%d/%m/%Y', dayfirst=True)
+    df_long['Date'] = pd.to_datetime(df_long['Date'], format='%d/%m/%Y', dayfirst=True)
+
     df_long = df_long.merge(population, how='left', left_on='Date', right_on='Date')
     df_long['Percentage of population'] = df_long.apply(lambda row: row['Number'] / row['POPULATION'] * 100 if row['Category'] in ['Total individuals', 'Priority individuals', 'nonPriority individuals'] else float('nan'), axis=1)
     df_long['Value per 10 000'] = df_long.apply(lambda row: row['Number'] / row['POPULATION'] * 10000 if row['Category'] in ['Total individuals', 'Priority individuals', 'nonPriority individuals'] else float('nan'), axis=1)
