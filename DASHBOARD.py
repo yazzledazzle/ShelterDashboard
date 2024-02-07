@@ -873,7 +873,7 @@ def waitlist_breakdowns():
     data = data[(data['Item'] == 'Dwelling need') | (data['Item'] == 'New tenancies by region') | (data['Item'] == 'Waiting time by region') | (data['Item'] == 'Waiting time by dwelling need')]
 
     if 'Date' in data.columns:
-        data['Date'] = pd.to_datetime(data['Date'], dayfirst=True)
+        data['Date'] = pd.to_datetime(data['Date'], dayfirst=True, format='mixed')
 
     col1, col2 = st.columns(2)
     with col1:
@@ -2137,8 +2137,8 @@ def upload_data():
             with col1:
                 file = st.file_uploader("Upload completed template")
             with col2:
-                date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
-                date_data = date_data.pd.to_datetime(date_data, format='%d/%m/%Y', dayfirst=True)
+                date_data = st.date_input('Enter date of data', key='date_data')
+                date_data = pd.to_datetime(date_data, format='%d/%m/%Y', dayfirst=True)
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
@@ -2825,7 +2825,8 @@ def getPopulation():
     return
 
 def Waitlist_load_data(newWaitlistData):
-    new_waitlist = pd.read_excel(newWaitlistData)
+    new_waitlist = pd.read_csv(newWaitlistData)
+    new_waitlist['Date'] = pd.to_datetime(new_waitlist['Date'], format='%Y-%m-%d')
     current = pd.read_csv(SimpleWaitlistData)
     #
     df = pd.concat([current, new_waitlist])
@@ -3411,6 +3412,7 @@ def census(census_data):
 
 
 if __name__ == "__main__":
+    import_waitlist_data()
     data_updates()
     home()
 
