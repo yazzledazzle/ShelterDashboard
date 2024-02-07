@@ -44,7 +44,10 @@ def home():
     if goto == 'Waitlist':
         Waitlist_select = st.sidebar.selectbox('Select view', ['Latest data', 'Overall trend', 'Breakdowns'])
         if Waitlist_select == 'Latest data':
-            waitlist_latest()
+            df = pd.read_csv(Waitlist_latestdf)
+            st.write('Table view temporary')
+            st.write('Latest data')
+            st.write(df)
         elif Waitlist_select == 'Overall trend':
             waitlist_trendcharts()
         elif Waitlist_select == 'Breakdowns':
