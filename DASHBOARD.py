@@ -72,8 +72,9 @@ def home():
         elif Airbnb_select == 'Geographic filters':
             airbnb_geo()
     elif goto == 'Upload data or external content':
-        upload_data()
-        show_update_log()
+        st.write('Sorry, this feature is under review and not currently available.')
+        #upload_data()
+        #show_update_log()
     elif goto == 'Census':
         census_data = st.sidebar.selectbox('Select dataset', ['Total by state', 'Geographic breakdown', 'Aboriginal and Torres Strait Islander status'])
         census(census_data)
@@ -2064,7 +2065,7 @@ def upload_data():
         df = pd.read_csv(newWaitlistData)
         col1, col2, col3, col4, col5, col6 = st.columns(6)
         with col1:
-            newDate = st.date_input('Enter date of data', format="DD/MM/YYYY")
+            newDate = st.date_input('Enter date of data')
             
         with col2:
             newTotalApp = st.number_input('Total applications', min_value=0, value=0)
@@ -2172,7 +2173,7 @@ def upload_data():
             with col1:
                 file = st.file_uploader("Upload completed template")
             with col2:
-                date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
+                date_data = st.date_input('Enter date of data', key='date_data')
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
@@ -2203,7 +2204,7 @@ def upload_data():
             with col1:
                 file = st.file_uploader("Upload completed template")
             with col2:
-                date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
+                date_data = st.date_input('Enter date of data', key='date_data')
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
@@ -2234,7 +2235,7 @@ def upload_data():
             with col1:
                 file = st.file_uploader("Upload completed template")
             with col2:
-                date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
+                date_data = st.date_input('Enter date of data', key='date_data')
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
@@ -2265,7 +2266,7 @@ def upload_data():
             with col1:
                 file = st.file_uploader("Upload completed template")
             with col2:
-                date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
+                date_data = st.date_input('Enter date of data', key='date_data')
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
@@ -2296,7 +2297,7 @@ def upload_data():
             with col1:
                 file = st.file_uploader("Upload completed template")
             with col2:
-                date_data = st.date_input('Enter date of data', format="DD/MM/YYYY", key='date_data')
+                date_data = st.date_input('Enter date of data', key='date_data')
             with col3:
                 st.markdown(f'</br>', unsafe_allow_html=True)
                 st.markdown(f'</br>', unsafe_allow_html=True)
@@ -3173,7 +3174,7 @@ def import_waitlist_data():
         df_long = Waitlist_calculate_cydiff(df_long)
         df_long = Waitlist_calculate_12_month_average(df_long)
         df_long = Waitlist_FYtdchange(df_long)
-        max_date = Waitlist_final_long(df_long, Waitlist_latestdf, Waitlist_trend_longdf)
+        max_date = Waitlist_final_long(df_long, Waitlist_trend_longdf, Waitlist_latestdf)
         update_date = pd.to_datetime('today').strftime('%d/%m/%Y')
         Waitlist_clear_new_data(newWaitlistData)
         update_log(max_date, update_date, 'Waitlist trend - statewide')
